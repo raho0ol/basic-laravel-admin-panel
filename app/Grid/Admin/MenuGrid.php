@@ -65,7 +65,12 @@ class MenuGrid extends CrudBuilder
                     'value' => function ($model) {
                         return count($model->menuItems);
                     },
-                ]
+                ],
+                'form_options' => function($model) {
+                    return [
+                        'hide' => true
+                    ];
+                }
             ],
             [
                 'attribute' => 'created_at',

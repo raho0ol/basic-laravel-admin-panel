@@ -65,7 +65,12 @@ class CategoryTypeGrid extends CrudBuilder
                     'value' => function ($model) {
                         return count($model->categories);
                     },
-                ]
+                ],
+                'form_options' => function($model) {
+                    return [
+                        'hide' => true
+                    ];
+                }
             ],
             [
                 'attribute' => 'is_flat',
