@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Grid\Admin\MediaGrid;
+use App\Http\Controllers\Controller;
 use BalajiDharma\LaravelAdminCore\Actions\Media\MediaCreateAction;
 use BalajiDharma\LaravelAdminCore\Actions\Media\MediaUpdateAction;
 use BalajiDharma\LaravelAdminCore\Data\Media\MediaCreateData;
 use BalajiDharma\LaravelAdminCore\Data\Media\MediaUpdateData;
 use BalajiDharma\LaravelFormBuilder\FormBuilder;
-use Plank\Mediable\Media;
+use BalajiDharma\LaravelMediaManager\Models\Media;
 
 class MediaController extends Controller
 {
@@ -20,6 +20,7 @@ class MediaController extends Controller
         $mediaItems->whereIsOriginal();
 
         $crud = (new MediaGrid)->list($mediaItems);
+
         return view('admin.crud.index', compact('crud'));
     }
 
@@ -29,6 +30,7 @@ class MediaController extends Controller
         $mediaItems = (new Media)->newQuery();
         $mediaItems->whereIsOriginal();
         $crud = (new MediaGrid)->form();
+
         return view('admin.crud.edit', compact('crud'));
     }
 
@@ -46,6 +48,7 @@ class MediaController extends Controller
         $media = Media::findOrFail($id);
         $this->authorize('adminView', $media);
         $crud = (new MediaGrid)->show($media);
+
         return view('admin.crud.show', compact('crud'));
     }
 
@@ -54,6 +57,7 @@ class MediaController extends Controller
         $media = Media::findOrFail($id);
         $this->authorize('adminUpdate', $media);
         $crud = (new MediaGrid)->form($media);
+
         return view('admin.crud.edit', compact('crud'));
     }
 

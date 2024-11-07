@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Grid\Admin\MenuGrid;
+use App\Http\Controllers\Controller;
 use BalajiDharma\LaravelAdminCore\Actions\Menu\MenuCreateAction;
 use BalajiDharma\LaravelAdminCore\Actions\Menu\MenuUpdateAction;
 use BalajiDharma\LaravelAdminCore\Data\Menu\MenuCreateData;
@@ -23,6 +23,7 @@ class MenuController extends Controller
         $menus = (new Menu)->newQuery()->with(['menuItems']);
 
         $crud = (new MenuGrid)->list($menus);
+
         return view('admin.crud.index', compact('crud'));
     }
 
@@ -35,6 +36,7 @@ class MenuController extends Controller
     {
         $this->authorize('adminCreate', Menu::class);
         $crud = (new MenuGrid)->form();
+
         return view('admin.crud.edit', compact('crud'));
     }
 
@@ -61,6 +63,7 @@ class MenuController extends Controller
     {
         $this->authorize('adminUpdate', $menu);
         $crud = (new MenuGrid)->form($menu);
+
         return view('admin.crud.edit', compact('crud'));
     }
 

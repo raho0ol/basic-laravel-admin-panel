@@ -3,7 +3,7 @@
             {{ __($title) }}
     </x-slot>
 
-    <div class="w-full py-2 overflow-hidden">
+    <div class="w-full py-2">
         {!! form($form) !!}
     </div>
 </x-admin.wrapper>

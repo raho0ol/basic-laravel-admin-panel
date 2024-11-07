@@ -2,9 +2,9 @@
 
 namespace App\Grid\Admin;
 
-use BalajiDharma\LaravelCrud\CrudBuilder;
 use App\Models\Role;
 use App\Models\User;
+use BalajiDharma\LaravelCrud\CrudBuilder;
 
 class UserGrid extends CrudBuilder
 {
@@ -28,8 +28,8 @@ class UserGrid extends CrudBuilder
                     'class' => 'BalajiDharma\LaravelCrud\Column\LinkColumn',
                     'route' => 'admin.user.show',
                     'route_params' => ['user' => 'id'],
-                    'attr' => ['class' => 'link link-primary']
-                ]
+                    'attr' => ['class' => 'link link-primary'],
+                ],
             ],
             [
                 'attribute' => 'name',
@@ -41,8 +41,8 @@ class UserGrid extends CrudBuilder
                     'class' => 'BalajiDharma\LaravelCrud\Column\LinkColumn',
                     'route' => 'admin.user.show',
                     'route_params' => ['user' => 'id'],
-                    'attr' => ['class' => 'link link-primary']
-                ]
+                    'attr' => ['class' => 'link link-primary'],
+                ],
             ],
             [
                 'attribute' => 'email',
@@ -52,12 +52,12 @@ class UserGrid extends CrudBuilder
             ],
             [
                 'attribute' => 'password',
-                'label' =>  __('Password'),
+                'label' => __('Password'),
                 'list' => false,
                 'show' => false,
                 'type' => 'password',
                 'fillable' => true,
-                'form_options' => function($model) {
+                'form_options' => function ($model) {
                     return [
                         'value' => '',
                     ];
@@ -78,18 +78,19 @@ class UserGrid extends CrudBuilder
                 'fillable' => true,
                 'list' => [
                     'class' => 'BalajiDharma\LaravelCrud\Column\ListColumn',
-                    'attribute' => 'name'
+                    'attribute' => 'name',
                 ],
                 'show' => [
                     'class' => 'BalajiDharma\LaravelCrud\Column\ListColumn',
-                    'attribute' => 'name'
+                    'attribute' => 'name',
                 ],
-                'form_options' => function($model) {
+                'form_options' => function ($model) {
                     $roles = Role::all();
                     $userHasRoles = [];
                     if ($model) {
                         $userHasRoles = array_column(json_decode($model->roles, true), 'name');
                     }
+
                     return [
                         'choices' => $roles->pluck('name', 'name')->toArray(),
                         'choice_options' => [
@@ -101,16 +102,17 @@ class UserGrid extends CrudBuilder
                         'expanded' => true,
                         'multiple' => true,
                     ];
-                }
+                },
             ],
+            include 'includes/tags.php',
             [
                 'attribute' => 'created_at',
-                'sortable' => true
+                'sortable' => true,
             ],
             [
                 'attribute' => 'updated_at',
-                'sortable' => true
-            ]
+                'sortable' => true,
+            ],
         ];
     }
 }

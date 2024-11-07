@@ -2,8 +2,8 @@
 
 namespace App\Grid\Admin;
 
-use BalajiDharma\LaravelCrud\CrudBuilder;
 use BalajiDharma\LaravelCategory\Models\Category;
+use BalajiDharma\LaravelCrud\CrudBuilder;
 
 class CategoryItemGrid extends CrudBuilder
 {
@@ -58,6 +58,7 @@ class CategoryItemGrid extends CrudBuilder
                 'type' => 'choice',
                 'form_options' => function ($model) {
                     $item_options = Category::selectOptions($this->addtional['type']->id, null, true);
+
                     return [
                         'choices' => $item_options,
                         'label' => __('Parent Item'),
@@ -77,24 +78,24 @@ class CategoryItemGrid extends CrudBuilder
                 'form_options' => function ($model) {
                     return [
                         'wrapper' => ['class' => 'form-control py-2 w-40'],
-                        'hide' => $this->addtional['type']->is_flat ? true : false,
                     ];
                 },
             ],
+            include 'includes/tags.php',
             [
                 'attribute' => 'created_at',
-                'sortable' => true
+                'sortable' => true,
             ],
             [
                 'attribute' => 'updated_at',
-                'sortable' => true
-            ]
+                'sortable' => true,
+            ],
         ];
     }
 
     public function buildRoutes($mainRoute = null)
     {
-        if(!$mainRoute){
+        if (! $mainRoute) {
             $routeName = request()->route()->getName();
             $mainRoute = substr($routeName, 0, strrpos($routeName, '.'));
         }

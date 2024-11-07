@@ -2,8 +2,8 @@
 
 namespace App\Grid\Admin;
 
-use BalajiDharma\LaravelCrud\CrudBuilder;
 use App\Models\Permission;
+use BalajiDharma\LaravelCrud\CrudBuilder;
 
 class PermissionGrid extends CrudBuilder
 {
@@ -24,7 +24,7 @@ class PermissionGrid extends CrudBuilder
                 'list' => [
                     'class' => 'BalajiDharma\LaravelCrud\Column\SerialColumn',
                 ],
-                'show' => false
+                'show' => false,
             ],
             [
                 'attribute' => 'id',
@@ -35,8 +35,8 @@ class PermissionGrid extends CrudBuilder
                     'class' => 'BalajiDharma\LaravelCrud\Column\LinkColumn',
                     'route' => 'admin.permission.show',
                     'route_params' => ['permission' => 'id'],
-                    'attr' => ['class' => 'link link-primary']
-                ]
+                    'attr' => ['class' => 'link link-primary'],
+                ],
             ],
             [
                 'attribute' => 'name',
@@ -48,17 +48,18 @@ class PermissionGrid extends CrudBuilder
                     'class' => 'BalajiDharma\LaravelCrud\Column\LinkColumn',
                     'route' => 'admin.permission.show',
                     'route_params' => ['permission' => 'id'],
-                    'attr' => ['class' => 'link link-primary']
-                ]
+                    'attr' => ['class' => 'link link-primary'],
+                ],
             ],
+            include 'includes/tags.php',
             [
                 'attribute' => 'created_at',
-                'sortable' => true
+                'sortable' => true,
             ],
             [
                 'attribute' => 'updated_at',
-                'sortable' => true
-            ]
+                'sortable' => true,
+            ],
         ];
     }
 }

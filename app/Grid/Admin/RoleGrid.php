@@ -2,9 +2,9 @@
 
 namespace App\Grid\Admin;
 
-use BalajiDharma\LaravelCrud\CrudBuilder;
-use App\Models\Role;
 use App\Models\Permission;
+use App\Models\Role;
+use BalajiDharma\LaravelCrud\CrudBuilder;
 
 class RoleGrid extends CrudBuilder
 {
@@ -28,8 +28,8 @@ class RoleGrid extends CrudBuilder
                     'class' => 'BalajiDharma\LaravelCrud\Column\LinkColumn',
                     'route' => 'admin.role.show',
                     'route_params' => ['role' => 'id'],
-                    'attr' => ['class' => 'link link-primary']
-                ]
+                    'attr' => ['class' => 'link link-primary'],
+                ],
             ],
             [
                 'attribute' => 'name',
@@ -41,8 +41,8 @@ class RoleGrid extends CrudBuilder
                     'class' => 'BalajiDharma\LaravelCrud\Column\LinkColumn',
                     'route' => 'admin.role.show',
                     'route_params' => ['role' => 'id'],
-                    'attr' => ['class' => 'link link-primary']
-                ]
+                    'attr' => ['class' => 'link link-primary'],
+                ],
             ],
             [
                 'attribute' => 'permissions',
@@ -51,13 +51,13 @@ class RoleGrid extends CrudBuilder
                 'fillable' => true,
                 'list' => [
                     'class' => 'BalajiDharma\LaravelCrud\Column\ListColumn',
-                    'attribute' => 'name'
+                    'attribute' => 'name',
                 ],
                 'show' => [
                     'class' => 'BalajiDharma\LaravelCrud\Column\ListColumn',
-                    'attribute' => 'name'
+                    'attribute' => 'name',
                 ],
-                'form_options' => function($model) {
+                'form_options' => function ($model) {
                     $hideField = false;
                     if (! $model || $model->name !== config('admin.super_admin', 'super-admin')) {
                         $permissions = Permission::all();
@@ -69,6 +69,7 @@ class RoleGrid extends CrudBuilder
                     if ($model) {
                         $roleHasPermissions = array_column(json_decode($model->permissions, true), 'name');
                     }
+
                     return [
                         'choices' => $permissions->pluck('name', 'name')->toArray(),
                         'choice_options' => [
@@ -79,18 +80,19 @@ class RoleGrid extends CrudBuilder
                         'selected' => $roleHasPermissions,
                         'expanded' => true,
                         'multiple' => true,
-                        'hide' => $hideField
+                        'hide' => $hideField,
                     ];
-                }
+                },
             ],
+            include 'includes/tags.php',
             [
                 'attribute' => 'created_at',
-                'sortable' => true
+                'sortable' => true,
             ],
             [
                 'attribute' => 'updated_at',
-                'sortable' => true
-            ]
+                'sortable' => true,
+            ],
         ];
     }
 }
