@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Grid\Admin\UserGrid;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Grid\Admin\UserGrid;
 use BalajiDharma\LaravelAdminCore\Actions\User\UserCreateAction;
 use BalajiDharma\LaravelAdminCore\Actions\User\UserUpdateAction;
 use BalajiDharma\LaravelAdminCore\Data\User\UserCreateData;
@@ -26,6 +26,7 @@ class UserController extends Controller
         $users = (new User)->newQuery()->with(['roles']);
 
         $crud = (new UserGrid)->list($users);
+
         return view('admin.crud.index', compact('crud'));
     }
 
@@ -38,6 +39,7 @@ class UserController extends Controller
     {
         $this->authorize('adminCreate', User::class);
         $crud = (new UserGrid)->form();
+
         return view('admin.crud.edit', compact('crud'));
     }
 
@@ -64,6 +66,7 @@ class UserController extends Controller
     {
         $this->authorize('adminView', $user);
         $crud = (new UserGrid)->show($user);
+
         return view('admin.crud.show', compact('crud'));
     }
 
@@ -77,6 +80,7 @@ class UserController extends Controller
         $this->authorize('adminUpdate', $user);
 
         $crud = (new UserGrid)->form($user);
+
         return view('admin.crud.edit', compact('crud'));
     }
 

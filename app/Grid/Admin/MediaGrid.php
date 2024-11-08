@@ -3,7 +3,7 @@
 namespace App\Grid\Admin;
 
 use BalajiDharma\LaravelCrud\CrudBuilder;
-use Plank\Mediable\Media;
+use BalajiDharma\LaravelMediaManager\Models\Media;
 
 class MediaGrid extends CrudBuilder
 {
@@ -28,6 +28,7 @@ class MediaGrid extends CrudBuilder
                 },
                 'form_options' => function ($model) {
                     $type = media_type_as_options();
+
                     return [
                         'choices' => $type,
                         'default_value' => $model ? $model->variant_name : null,
@@ -46,14 +47,14 @@ class MediaGrid extends CrudBuilder
                     'class' => 'BalajiDharma\LaravelCrud\Column\LinkColumn',
                     'route' => 'admin.media.show',
                     'route_params' => ['medium' => 'id'],
-                    'attr' => ['class' => 'link link-primary']
+                    'attr' => ['class' => 'link link-primary'],
                 ],
                 'form_options' => function ($model) {
                     return [
                         'attribute' => 'name',
                         'default_value' => $model ? $model->filename : null,
                     ];
-                }
+                },
             ],
             [
                 'attribute' => 'alt',
@@ -68,22 +69,24 @@ class MediaGrid extends CrudBuilder
                 'fillable' => true,
                 'type' => 'file',
                 'value' => function ($model) {
-                    if($model->aggregate_type != 'image'){
+                    if ($model->aggregate_type != 'image') {
                         $file = media_type_icon($model);
                     } else {
                         $file = '<image src="'.$model->getUrl().'" alt="'.$model->alt.'">';
                     }
+
                     return '<div class="avatar"><div class="w-32 rounded">'.$file.'</div><div>';
                 },
             ],
+            include 'includes/tags.php',
             [
                 'attribute' => 'created_at',
-                'sortable' => true
+                'sortable' => true,
             ],
             [
                 'attribute' => 'updated_at',
-                'sortable' => true
-            ]
+                'sortable' => true,
+            ],
         ];
     }
 }

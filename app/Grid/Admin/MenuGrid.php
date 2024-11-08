@@ -23,11 +23,11 @@ class MenuGrid extends CrudBuilder
                 'label' => __('ID'),
                 'sortable' => true,
                 'searchable' => true,
-                'form_options' => function($model) {
+                'form_options' => function ($model) {
                     return [
-                        'hide' => true
+                        'hide' => true,
                     ];
-                }
+                },
             ],
             [
                 'attribute' => 'name',
@@ -42,17 +42,17 @@ class MenuGrid extends CrudBuilder
                 'sortable' => true,
                 'filter' => 'like',
                 'searchable' => true,
-                'form_options' => function($model) {
+                'form_options' => function ($model) {
                     return [
                         'label' => __('Machine-readable name'),
                         'attr' => $model->machine_name ? ['disabled' => 'disabled'] : [],
                     ];
-                }
+                },
             ],
             [
                 'attribute' => 'description',
                 'label' => __('Description'),
-                'list' => false
+                'list' => false,
             ],
             [
                 'attribute' => 'items',
@@ -66,20 +66,21 @@ class MenuGrid extends CrudBuilder
                         return count($model->menuItems);
                     },
                 ],
-                'form_options' => function($model) {
+                'form_options' => function ($model) {
                     return [
-                        'hide' => true
+                        'hide' => true,
                     ];
-                }
+                },
             ],
+            include 'includes/tags.php',
             [
                 'attribute' => 'created_at',
-                'sortable' => true
+                'sortable' => true,
             ],
             [
                 'attribute' => 'updated_at',
-                'sortable' => true
-            ]
+                'sortable' => true,
+            ],
         ];
     }
 }

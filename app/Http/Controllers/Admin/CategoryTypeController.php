@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Grid\Admin\CategoryTypeGrid;
+use App\Http\Controllers\Controller;
 use BalajiDharma\LaravelAdminCore\Actions\CategoryType\CategoryTypeCreateAction;
 use BalajiDharma\LaravelAdminCore\Actions\CategoryType\CategoryTypeUpdateAction;
 use BalajiDharma\LaravelAdminCore\Data\CategoryType\CategoryTypeCreateData;
@@ -22,6 +22,7 @@ class CategoryTypeController extends Controller
         $this->authorize('adminViewAny', CategoryType::class);
         $categoryTypes = (new CategoryType)->newQuery()->with(['categories']);
         $crud = (new CategoryTypeGrid)->list($categoryTypes);
+
         return view('admin.crud.index', compact('crud'));
     }
 
@@ -34,6 +35,7 @@ class CategoryTypeController extends Controller
     {
         $this->authorize('adminCreate', CategoryType::class);
         $crud = (new CategoryTypeGrid)->form();
+
         return view('admin.crud.edit', compact('crud'));
     }
 
@@ -61,6 +63,7 @@ class CategoryTypeController extends Controller
     {
         $this->authorize('adminUpdate', $type);
         $crud = (new CategoryTypeGrid)->form($type);
+
         return view('admin.crud.edit', compact('crud'));
     }
 

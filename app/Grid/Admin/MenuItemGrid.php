@@ -58,6 +58,7 @@ class MenuItemGrid extends CrudBuilder
                 'type' => 'choice',
                 'form_options' => function ($model) {
                     $item_options = MenuItem::selectOptions($this->addtional['menu']->id, null, true);
+
                     return [
                         'choices' => $item_options,
                         'selected' => $this->model->parent_id ?? null,
@@ -102,6 +103,7 @@ class MenuItemGrid extends CrudBuilder
                     if ($model) {
                         $itemHasRoles = array_column(json_decode($model->roles, true), 'name');
                     }
+
                     return [
                         'choices' => $roles->pluck('name', 'name')->toArray(),
                         'choice_options' => [
@@ -115,20 +117,21 @@ class MenuItemGrid extends CrudBuilder
                     ];
                 },
             ],
+            include 'includes/tags.php',
             [
                 'attribute' => 'created_at',
-                'sortable' => true
+                'sortable' => true,
             ],
             [
                 'attribute' => 'updated_at',
-                'sortable' => true
-            ]
+                'sortable' => true,
+            ],
         ];
     }
 
     public function buildRoutes($mainRoute = null)
     {
-        if(!$mainRoute){
+        if (! $mainRoute) {
             $routeName = request()->route()->getName();
             $mainRoute = substr($routeName, 0, strrpos($routeName, '.'));
         }

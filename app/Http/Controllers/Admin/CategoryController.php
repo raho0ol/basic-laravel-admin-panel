@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Grid\Admin\CategoryItemGrid;
+use App\Http\Controllers\Controller;
 use BalajiDharma\LaravelAdminCore\Actions\Category\CategoryCreateAction;
 use BalajiDharma\LaravelAdminCore\Actions\Category\CategoryUpdateAction;
 use BalajiDharma\LaravelAdminCore\Data\Category\CategoryCreateData;
@@ -20,6 +20,9 @@ class CategoryController extends Controller
      */
     public function index(CategoryType $type)
     {
+        if (request()->has('search') && request()->has('autocomplete')) {
+            return $this->autocomplete($type);
+        }
         $this->authorize('adminViewAny', Category::class);
         $items = (new Category)->toTree($type->id, true);
 
@@ -34,9 +37,10 @@ class CategoryController extends Controller
     public function create(CategoryType $type)
     {
         $this->authorize('adminCreate', Category::class);
-        $menuItemGrid = (new CategoryItemGrid);
-        $menuItemGrid->setAddtional(['type' => $type]);
-        $crud = $menuItemGrid->form();
+        $categoryItemGrid = (new CategoryItemGrid);
+        $categoryItemGrid->setAddtional(['type' => $type]);
+        $crud = $categoryItemGrid->form();
+
         return view('admin.crud.edit', compact('crud'));
     }
 
@@ -62,9 +66,10 @@ class CategoryController extends Controller
     public function edit(CategoryType $type, Category $item)
     {
         $this->authorize('adminUpdate', $item);
-        $menuItemGrid = (new CategoryItemGrid);
-        $menuItemGrid->setAddtional(['type' => $type]);
-        $crud = $menuItemGrid->form($item);
+        $categoryItemGrid = (new CategoryItemGrid);
+        $categoryItemGrid->setAddtional(['type' => $type]);
+        $crud = $categoryItemGrid->form($item);
+
         return view('admin.crud.edit', compact('crud'));
     }
 
@@ -95,5 +100,21 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.category.type.item.index', $type->id)
             ->with('message', __('Category deleted successfully'));
+    }
+
+    public function autocomplete(CategoryType $type)
+    {
+        $categories = (new Category)->where('name', 'like', '%'.request()->search.'%')
+            ->where('category_type_id', $type->id)
+            ->limit(5)
+            ->get(['id', 'name']);
+
+        $formattedCategories = $categories->map(function ($category) {
+            return [
+                'value' => $category->name,
+            ];
+        });
+
+        return response()->json($formattedCategories);
     }
 }

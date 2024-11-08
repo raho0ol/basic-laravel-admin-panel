@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Grid\Admin\MenuItemGrid;
+use App\Http\Controllers\Controller;
 use BalajiDharma\LaravelAdminCore\Actions\MenuItem\MenuItemCreateAction;
 use BalajiDharma\LaravelAdminCore\Actions\MenuItem\MenuItemUpdateAction;
 use BalajiDharma\LaravelAdminCore\Data\MenuItem\MenuItemCreateData;
@@ -22,6 +22,7 @@ class MenuItemController extends Controller
     {
         $this->authorize('adminViewAny', MenuItem::class);
         $items = (new MenuItem)->toTree($menu->id, true);
+
         return view('admin.menu.item.index', compact('items', 'menu'));
     }
 
@@ -36,6 +37,7 @@ class MenuItemController extends Controller
         $menuItemGrid = (new MenuItemGrid);
         $menuItemGrid->setAddtional(['menu' => $menu]);
         $crud = $menuItemGrid->form();
+
         return view('admin.crud.edit', compact('crud'));
     }
 
@@ -64,6 +66,7 @@ class MenuItemController extends Controller
         $menuItemGrid = (new MenuItemGrid);
         $menuItemGrid->setAddtional(['menu' => $menu]);
         $crud = $menuItemGrid->form($item);
+
         return view('admin.crud.edit', compact('crud'));
     }
 

@@ -2,8 +2,8 @@
 
 namespace App\Grid\Admin;
 
-use BalajiDharma\LaravelCrud\CrudBuilder;
 use BalajiDharma\LaravelCategory\Models\CategoryType;
+use BalajiDharma\LaravelCrud\CrudBuilder;
 
 class CategoryTypeGrid extends CrudBuilder
 {
@@ -23,11 +23,11 @@ class CategoryTypeGrid extends CrudBuilder
                 'label' => __('ID'),
                 'sortable' => true,
                 'searchable' => true,
-                'form_options' => function($model) {
+                'form_options' => function ($model) {
                     return [
-                        'hide' => true
+                        'hide' => true,
                     ];
-                }
+                },
             ],
             [
                 'attribute' => 'name',
@@ -42,17 +42,17 @@ class CategoryTypeGrid extends CrudBuilder
                 'sortable' => true,
                 'filter' => 'like',
                 'searchable' => true,
-                'form_options' => function($model) {
+                'form_options' => function ($model) {
                     return [
                         'label' => __('Machine-readable name'),
                         'attr' => $model->machine_name ? ['disabled' => 'disabled'] : [],
                     ];
-                }
+                },
             ],
             [
                 'attribute' => 'description',
                 'label' => __('Description'),
-                'list' => false
+                'list' => false,
             ],
             [
                 'attribute' => 'items',
@@ -66,11 +66,11 @@ class CategoryTypeGrid extends CrudBuilder
                         return count($model->categories);
                     },
                 ],
-                'form_options' => function($model) {
+                'form_options' => function ($model) {
                     return [
-                        'hide' => true
+                        'hide' => true,
                     ];
-                }
+                },
             ],
             [
                 'attribute' => 'is_flat',
@@ -78,24 +78,25 @@ class CategoryTypeGrid extends CrudBuilder
                 'sortable' => true,
                 'searchable' => true,
                 'type' => 'checkbox',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return $model->is_flat ? __('Yes') : __('No');
                 },
-                'form_options' => function($model) {
+                'form_options' => function ($model) {
                     return [
                         'value' => 1,
                         'checked' => $model ? $model->is_flat : false,
                     ];
-                }
+                },
             ],
+            include 'includes/tags.php',
             [
                 'attribute' => 'created_at',
-                'sortable' => true
+                'sortable' => true,
             ],
             [
                 'attribute' => 'updated_at',
-                'sortable' => true
-            ]
+                'sortable' => true,
+            ],
         ];
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Grid\Admin\RoleGrid;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
-use App\Grid\Admin\RoleGrid;
 use BalajiDharma\LaravelAdminCore\Actions\Role\RoleCreateAction;
 use BalajiDharma\LaravelAdminCore\Actions\Role\RoleUpdateAction;
 use BalajiDharma\LaravelAdminCore\Data\Role\RoleCreateData;
@@ -23,6 +23,7 @@ class RoleController extends Controller
         $roles = (new Role)->newQuery()->with(['permissions']);
 
         $crud = (new RoleGrid)->list($roles);
+
         return view('admin.crud.index', compact('crud'));
     }
 
@@ -35,6 +36,7 @@ class RoleController extends Controller
     {
         $this->authorize('adminCreate', Role::class);
         $crud = (new RoleGrid)->form();
+
         return view('admin.crud.edit', compact('crud'));
     }
 
@@ -75,6 +77,7 @@ class RoleController extends Controller
         $this->authorize('adminUpdate', $role);
 
         $crud = (new RoleGrid)->form($role);
+
         return view('admin.crud.edit', compact('crud'));
     }
 

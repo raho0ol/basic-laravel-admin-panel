@@ -3,6 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import '@yaireo/tagify/dist/tagify.css';
+
 :root {
   --my-color: #fff;
 }

@@ -7,8 +7,9 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/css/admin/app.css',
+                'resources/css/admin/app.scss',
                 'resources/js/admin/app.js',
+                'resources/js/form-builder/field.js',
             ],
             refresh: true,
         }),

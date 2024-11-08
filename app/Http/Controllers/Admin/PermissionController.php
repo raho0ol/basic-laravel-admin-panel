@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Grid\Admin\PermissionGrid;
 use App\Http\Controllers\Controller;
 use App\Models\Permission;
-use App\Grid\Admin\PermissionGrid;
 use BalajiDharma\LaravelAdminCore\Actions\Permission\PermissionCreateAction;
 use BalajiDharma\LaravelAdminCore\Actions\Permission\PermissionUpdateAction;
 use BalajiDharma\LaravelAdminCore\Data\Permission\PermissionCreateData;
@@ -23,6 +23,7 @@ class PermissionController extends Controller
         $permissions = (new Permission)->newQuery();
 
         $crud = (new PermissionGrid)->list($permissions);
+
         return view('admin.crud.index', compact('crud'));
     }
 
@@ -35,6 +36,7 @@ class PermissionController extends Controller
     {
         $this->authorize('adminCreate', Permission::class);
         $crud = (new PermissionGrid)->form();
+
         return view('admin.crud.edit', compact('crud'));
     }
 
@@ -61,6 +63,7 @@ class PermissionController extends Controller
     {
         $this->authorize('adminView', $permission);
         $crud = (new PermissionGrid)->show($permission);
+
         return view('admin.crud.show', compact('crud'));
     }
 
@@ -73,6 +76,7 @@ class PermissionController extends Controller
     {
         $this->authorize('adminUpdate', $permission);
         $crud = (new PermissionGrid)->form($permission);
+
         return view('admin.crud.edit', compact('crud'));
     }
 
