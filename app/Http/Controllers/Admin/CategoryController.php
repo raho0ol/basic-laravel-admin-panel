@@ -24,6 +24,14 @@ class CategoryController extends Controller
             return $this->autocomplete($type);
         }
         $this->authorize('adminViewAny', Category::class);
+
+        if ($type->is_flat) {
+            $categories = (new Category)->newQuery()->whereRelation('categoryType', 'id', $type->id);
+            $crud = (new CategoryItemGrid);
+            $crud->setAddtional(['type' => $type]);
+            $crud = $crud->list($categories);
+            return view('admin.crud.index', compact('crud'));
+        }
         $items = (new Category)->toTree($type->id, true);
 
         return view('admin.category.item.index', compact('items', 'type'));

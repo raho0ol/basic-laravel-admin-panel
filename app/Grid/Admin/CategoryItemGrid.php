@@ -40,11 +40,15 @@ class CategoryItemGrid extends CrudBuilder
             [
                 'attribute' => 'description',
                 'label' => __('Description'),
+                'list' => false,
             ],
             [
                 'attribute' => 'enabled',
                 'label' => __('Enabled'),
                 'type' => 'checkbox',
+                'value' => function ($model) {
+                    return $model->enabled ? 'Yes' : 'No';
+                },
                 'form_options' => function ($model) {
                     return [
                         'value' => 1,
@@ -70,6 +74,7 @@ class CategoryItemGrid extends CrudBuilder
                         ],
                     ];
                 },
+                'list' => false,
             ],
             [
                 'attribute' => 'weight',
@@ -80,15 +85,18 @@ class CategoryItemGrid extends CrudBuilder
                         'wrapper' => ['class' => 'form-control py-2 w-40'],
                     ];
                 },
+                'list' => false,
             ],
             include 'includes/tags.php',
             [
                 'attribute' => 'created_at',
                 'sortable' => true,
+                'list' => false,
             ],
             [
                 'attribute' => 'updated_at',
                 'sortable' => true,
+                'list' => false,
             ],
         ];
     }
