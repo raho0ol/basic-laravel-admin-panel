@@ -27,6 +27,7 @@
 - `cd admin-app`
 - `./vendor/bin/sail pull mysql redis meilisearch mailpit selenium`
 - `./vendor/bin/sail build`
+- `sudo chown -R $USER:$USER .`
 - `./vendor/bin/sail up`
 - `./vendor/bin/sail npm install`
 - `./vendor/bin/sail npm run dev`
