@@ -78,7 +78,7 @@ class MediaGrid extends CrudBuilder
                     return '<div class="avatar"><div class="w-32 rounded">'.$file.'</div><div>';
                 },
             ],
-            include 'includes/tags.php',
+            GridHelper::getTagsField('admin_tags', config('admin.tag_name')),
             [
                 'attribute' => 'created_at',
                 'sortable' => true,

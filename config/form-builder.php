@@ -23,6 +23,9 @@ return [
                 'label_class' => 'label-text cursor-pointer',
                 'field_class' => 'checkbox',
             ],
+            'textarea' => [
+                'field_class' => 'input-bordered w-full mt-2',
+            ],
         ],
     ],
 ];
