@@ -51,7 +51,7 @@ class PermissionGrid extends CrudBuilder
                     'attr' => ['class' => 'link link-primary'],
                 ],
             ],
-            include 'includes/tags.php',
+            GridHelper::getTagsField('admin_tags', config('admin.tag_name')),
             [
                 'attribute' => 'created_at',
                 'sortable' => true,
