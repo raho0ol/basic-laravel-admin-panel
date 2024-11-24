@@ -22,7 +22,10 @@ class PermissionController extends Controller
         $this->authorize('adminViewAny', Permission::class);
         $permissions = (new Permission)->newQuery();
 
-        $crud = (new PermissionGrid)->list($permissions);
+        $crud = (new PermissionGrid)
+                    ->setDisplaySearch(true)
+                    ->setDisplayFilters(false)
+                    ->list($permissions);
 
         return view('admin.crud.index', compact('crud'));
     }

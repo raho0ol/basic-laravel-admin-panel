@@ -23,6 +23,7 @@ class MenuGrid extends CrudBuilder
                 'label' => __('ID'),
                 'sortable' => true,
                 'searchable' => true,
+                'filter' => true,
                 'form_options' => function ($model) {
                     return [
                         'hide' => true,

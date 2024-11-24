@@ -23,6 +23,7 @@ class CategoryTypeGrid extends CrudBuilder
                 'label' => __('ID'),
                 'sortable' => true,
                 'searchable' => true,
+                'filter' => '=',
                 'form_options' => function ($model) {
                     return [
                         'hide' => true,
@@ -77,6 +78,7 @@ class CategoryTypeGrid extends CrudBuilder
                 'label' => __('Use Flat Category'),
                 'sortable' => true,
                 'searchable' => true,
+                'filter' => '=',
                 'type' => 'checkbox',
                 'value' => function ($model) {
                     return $model->is_flat ? __('Yes') : __('No');
@@ -91,7 +93,10 @@ class CategoryTypeGrid extends CrudBuilder
             GridHelper::getTagsField('admin_tags', config('admin.tag_name')),
             [
                 'attribute' => 'created_at',
+                'label' => __('Created At'),
                 'sortable' => true,
+                'filter' => 'between',
+                'fillable' => false
             ],
             [
                 'attribute' => 'updated_at',

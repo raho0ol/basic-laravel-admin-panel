@@ -18,12 +18,18 @@ class CommentGrid extends CrudBuilder
 
     public function columns()
     {
+        $statusOptions = [];
+        foreach (config('comment.status') as $key => $value) {
+            $statusOptions[$value] = __($key);
+        };
+
         return [
             [
                 'attribute' => 'id',
                 'label' => __('ID'),
                 'sortable' => true,
                 'searchable' => true,
+                'filter' => '=',
                 'list' => [
                     'class' => 'BalajiDharma\LaravelCrud\Column\LinkColumn',
                     'route' => 'admin.comment.show',
@@ -35,6 +41,7 @@ class CommentGrid extends CrudBuilder
                 'attribute' => 'content',
                 'label' => __('Content'),
                 'searchable' => true,
+                'filter' => 'like',
                 'list' => [
                     'class' => 'BalajiDharma\LaravelCrud\Column\LinkColumn',
                     'route' => 'admin.comment.show',
@@ -120,17 +127,14 @@ class CommentGrid extends CrudBuilder
                 'attribute' => 'status',
                 'label' => __('Status'),
                 'type' => 'select',
+                'filter' => '=',
+                'filter_options' => $statusOptions,
                 'value' => function ($model) {
                     return __(array_flip(config('comment.status'))[$model->status]);
                 },
-                'form_options' => function ($model) {
-                    $status = [];
-                    foreach (config('comment.status') as $key => $value) {
-                        $status[$value] = __($key);
-                    };
-
+                'form_options' => function ($model) use ($statusOptions) {
                     return [
-                        'choices' => $status,
+                        'choices' => $statusOptions,
                         'default_value' => $model ? $model->status : null,
                     ];
                 },

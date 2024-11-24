@@ -19,12 +19,15 @@ class ThreadGrid extends CrudBuilder
 
     public function columns()
     {
+        $type = CategoryType::where('machine_name', config('forum.category_name'))->first();
+        $categories = $type ? Category::selectOptions($type->id) : [];
         return [
             [
                 'attribute' => 'id',
                 'label' => __('ID'),
                 'sortable' => true,
                 'searchable' => true,
+                'filter' => '=',
                 'list' => [
                     'class' => 'BalajiDharma\LaravelCrud\Column\LinkColumn',
                     'route' => 'admin.thread.show',
@@ -37,12 +40,15 @@ class ThreadGrid extends CrudBuilder
                 'label' => __('Category'),
                 'type' => 'select',
                 'fillable' => true,
+                'sortable' => true,
+                'filter' => '=',
+                'filter_options' => $categories,
+                'relation' => 'modelCategories',
+                'relation_field' => 'id',
                 'value' => function ($model) {
                     return $model ? optional($model->getCategoriesByType(config('forum.category_name'))->first())->name : null;
                 },
-                'form_options' => function ($model) {
-                    $type = CategoryType::where('machine_name', config('forum.category_name'))->first();
-                    $categories = $type ? Category::selectOptions($type->id) : [];
+                'form_options' => function ($model) use ($categories) {
                     return [
                         'choices' => $categories,
                         'empty_value' => __('Select an option'),
