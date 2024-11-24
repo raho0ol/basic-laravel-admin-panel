@@ -24,6 +24,7 @@ class UserGrid extends CrudBuilder
                 'label' => __('ID'),
                 'sortable' => true,
                 'searchable' => true,
+                'filter' => '=',
                 'list' => [
                     'class' => 'BalajiDharma\LaravelCrud\Column\LinkColumn',
                     'route' => 'admin.user.show',
@@ -47,6 +48,7 @@ class UserGrid extends CrudBuilder
             [
                 'attribute' => 'email',
                 'label' => __('Email'),
+                'filter' => 'like',
                 'sortable' => true,
                 'searchable' => true,
             ],

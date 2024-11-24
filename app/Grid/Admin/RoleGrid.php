@@ -24,6 +24,7 @@ class RoleGrid extends CrudBuilder
                 'label' => __('ID'),
                 'sortable' => true,
                 'searchable' => true,
+                'filter' => '=',
                 'list' => [
                     'class' => 'BalajiDharma\LaravelCrud\Column\LinkColumn',
                     'route' => 'admin.role.show',

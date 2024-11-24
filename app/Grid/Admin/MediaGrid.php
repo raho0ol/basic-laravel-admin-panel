@@ -36,6 +36,15 @@ class MediaGrid extends CrudBuilder
                 },
             ],
             [
+                'attribute' => 'variant_name',
+                'label' => __('Type'),
+                'type' => 'select',
+                'filter' => '=',
+                'filter_options' => media_type_as_options(),
+                'list' => false,
+                'show' => false
+            ],
+            [
                 'attribute' => 'filename',
                 'fillable' => true,
                 'label' => __('Name'),
