@@ -84,6 +84,7 @@ class ThreadGrid extends CrudBuilder
             [
                 'attribute' => 'content',
                 'label' => __('Content'),
+                'filter' => 'like',
                 'form_options' => function ($model) {
                     return [
                         'field_type' => 'textarea',
