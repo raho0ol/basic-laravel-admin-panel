@@ -3,6 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "choices.js/src/styles/choices";
 @import '@yaireo/tagify/dist/tagify.css';
 
 :root {

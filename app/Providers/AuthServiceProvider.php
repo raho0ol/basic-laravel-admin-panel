@@ -21,6 +21,8 @@ class AuthServiceProvider extends ServiceProvider
         'BalajiDharma\LaravelMenu\Models\Menu' => 'BalajiDharma\LaravelAdminCore\Policies\MenuPolicy',
         'BalajiDharma\LaravelMenu\Models\MenuItem' => 'BalajiDharma\LaravelAdminCore\Policies\MenuItemPolicy',
         'Plank\Mediable\Media' => 'BalajiDharma\LaravelAdminCore\Policies\MediaPolicy',
+        'BalajiDharma\LaravelComment\Models\Comment' => 'BalajiDharma\LaravelAdminCore\Policies\CommentPolicy',
+        'BalajiDharma\LaravelForum\Models\Thread' => 'BalajiDharma\LaravelAdminCore\Policies\ThreadPolicy',
     ];
 
     /**
