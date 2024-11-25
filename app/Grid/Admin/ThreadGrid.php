@@ -53,6 +53,9 @@ class ThreadGrid extends CrudBuilder
                         'choices' => $categories,
                         'empty_value' => __('Select an option'),
                         'selected' => $model ? optional($model->getCategoriesByType(config('forum.category_name'))->first())->id : null,
+                        'attr' => [
+                            'data-choices' => '1',
+                        ],
                     ];
                 },
             ],
