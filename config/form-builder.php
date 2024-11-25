@@ -24,7 +24,7 @@ return [
                 'field_class' => 'checkbox',
             ],
             'textarea' => [
-                'field_class' => 'input-bordered w-full mt-2',
+                'field_class' => 'textarea input-bordered w-full mt-2',
             ],
         ],
     ],

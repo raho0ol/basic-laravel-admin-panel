@@ -98,7 +98,7 @@ class CommentGrid extends CrudBuilder
                 'list' => false,
                 'form_options' => function ($model) {
                     $commentable_type = [
-                        'Balajidharma\LaravelForum\Models\Thread' => __('Thread'),
+                        'BalajiDharma\LaravelForum\Models\Thread' => __('Thread'),
                     ];
                     
                     return [
